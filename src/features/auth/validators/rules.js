@@ -1,16 +1,20 @@
 export const required = (value, field) => {
-    return value.trim() ? false : `${field} is required.`
-}
+  return value.trim() ? "" : `${field} is required.`;
+};
 
 export const invalidEmail = (value) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(value) ? false : 'Email is invalid.'
-}
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(value) ? "" : "Email is invalid.";
+};
 
-export const minLenght = (value, min, field) => {
-    return value.lenght >= min ? false : `${field} must be at least 8 ${min} characters.`
-}
+export const minLength = (value, min, field) => {
+  return value.length >= min ? "" : `${field} must be at least ${min} characters.`;
+};
 
-export const match = (value, target) => {
-    return value == target ? false : `${target} do not match.`
-}
+export const match = (value, target, field) => {
+  return value == target ? "" : `${field} do not match.`;
+};
+
+export const accept = (value) => {
+  return value ? "" : "You must accept the policy.";
+};

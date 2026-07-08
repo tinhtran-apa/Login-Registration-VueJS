@@ -2,40 +2,73 @@
 import Button from "@/components/common/button.vue";
 import Input from "@/components/common/input.vue";
 import Label from "@/components/common/label.vue";
+import eyeIcon from "@/assets/icons/eye.svg";
+import { computed, useSlots } from "vue";
 
-defineProps({
+const props = defineProps({
   forms: {
     type: Array,
-    default: [],
+    default: () => [],
   },
-  handleSubmit: {
-    type: Function,
-    default: () => "",
+  submit: {
+    type: String,
+    default: "",
+  },
+  errors: {
+    type: Object,
+    default: () => ({}),
   },
 });
+
 const model = defineModel({
+  type: Object,
   default: () => ({}),
 });
+
+const slots = useSlots();
+
+const emit = defineEmits(["submit", "clear-error", "show-password"]);
+
+const focusError = (field) => {
+  return field ? "border-red-500 focus:border-red-500 focus:outline-none" : "";
+};
+
+const showEye = (field) => {
+  return field === "password" || field === "confirmPassword" ? "block" : "hidden";
+};
+
 </script>
 <template>
-  <form class="pb-5" @submit.prevent="handleSubmit">
-    <template v-for="form in forms" :key="form.key">
+  <form class="pb-5" @submit.prevent="emit('submit')">
+    <template v-for="form in props.forms" :key="form.id">
       <div class="flex flex-col gap-1.5">
         <div class="flex justify-between items-center">
           <Label :for="form.id">{{ form.title }}</Label>
+
+          <span class="text-red-500 text-xs leading-5 tracking-normal">{{ props.errors[form.id] }}</span>
         </div>
 
-        <Input
-          v-model="model[form.id]"
-          class="mb-4"
-          :type="form.type"
-          :id="form.id"
-          :placeholder="form.placeholder"
-        />
+        <div class="relative">
+          <Input
+            v-model="model[form.id]"
+            :class="['mb-4', focusError(props.errors[form.id])]"
+            :type="form.type"
+            :id="form.id"
+            :placeholder="form.placeholder"
+            @input="emit('clearError', form.id)"
+          />
+          <button
+            @click="emit('show-password', form.id)"
+            type="button"
+            :class="['absolute right-3 top-[10.5px] bg-transparent border-0', showEye(form.id)]"
+          >
+            <img :src="eyeIcon" alt="" />
+          </button>
+        </div>
       </div>
     </template>
-    <div class="flex justify-between items-center pb-5"><slot /></div>
+    <div v-if="slots.default" class="flex justify-between items-center pb-5"><slot /></div>
 
-    <Button type="submit">Sign In</Button>
+    <Button type="submit">{{ props.submit }}</Button>
   </form>
 </template>
