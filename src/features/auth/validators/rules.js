@@ -1,5 +1,5 @@
 export const required = (value, field) => {
-  return value.trim() ? "" : `${field} is required.`;
+  return String(value ?? "").trim() ? "" : `${field} is required.`;
 };
 
 export const invalidEmail = (value) => {

@@ -68,7 +68,10 @@ const checkInputOtp = computed(() => {
               :type="form.type"
               :id="form.id"
               :placeholder="form.placeholder"
-              @input="emit('clearError', form.id)"
+              :maxlength="form.maxlength"
+              :pattern="form.pattern"
+              :inputmode="form.inputmode"
+              @input="emit('clear-error', form.id)"
             />
             <button
               v-if="showEye(form.id)"

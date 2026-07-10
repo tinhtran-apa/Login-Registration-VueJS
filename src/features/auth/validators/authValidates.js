@@ -24,6 +24,40 @@ export const validateRegister = (form) => {
   return errors;
 };
 
+export const validateForgotPassword = (form) => {
+  const errors = {};
+  errors.email = required(form.email, "Email") || invalidEmail(form.email);
+  if (!errors.email) {
+    return;
+  }
+  return errors;
+};
+
+export const validateResetPassword = (form) => {
+  const errors = {};
+  errors.newPassword = required(form.newPassword, "Password") || minLength(form.newPassword, 8, "Password");
+  errors.confirmNewPassword =
+    required(form.confirmNewPassword, "Confirm password") || match(form.newPassword, form.confirmNewPassword, "Password");
+  if (!errors.newPassword && !errors.confirmNewPassword) {
+    return;
+  }
+  return errors;
+};
+
+export const validateVerifyEmail = (form, length = 6) => {
+  const errors = {};
+  let hasError = false;
+  for (let i = 0; i < length; i++) {
+    const id = `otp${i}`;
+    errors[id] = required(form[id] || "", "Code");
+    if (errors[id]) hasError = true;
+  }
+  if (!hasError) {
+    return;
+  }
+  return errors;
+};
+
 export const clearError = (error, field) => {
   error[field] = "";
 };

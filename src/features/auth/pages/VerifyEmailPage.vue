@@ -1,34 +1,66 @@
 <script setup>
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 import AuthForm from "../components/AuthForm.vue";
 import AuthHeader from "../components/AuthHeader.vue";
 import LeftPanel from "../components/LeftPanel.vue";
 import RightPanel from "../components/RightPanel.vue";
 import arrowLeft from "@/assets/icons/arrow-left.svg";
-import Button from "@/components/common/button.vue";
+import mailIcon from "@/assets/icons/mail.svg";
+import { clearError, validateVerifyEmail } from "../validators/authValidates.js";
 
 const header = {
   title: "Verify your email",
   des: `We sent a 6-digit code to your email. Enter it below to confirm your address.`,
 };
-let forms = ref([{}]);
-for (let index = 0; index < 6; index++) {
+const OTP_LENGTH = 6;
+const forms = ref([]);
+const formSubmit = reactive({});
+
+for (let index = 0; index < OTP_LENGTH; index++) {
+  const id = `otp${index}`;
   forms.value[index] = {
-    id: `otp${index}`,
+    id,
     title: "",
     type: "number",
     placeholder: "",
+    maxlength: 1,
+    pattern: "[0-9]",
+    inputmode: "numeric",
   };
+  formSubmit[id] = "";
 }
+
+const errors = ref({});
+
+const handleSubmit = () => {
+  const result = validateVerifyEmail(formSubmit, OTP_LENGTH);
+  errors.value = result || {};
+  if (!result) {
+    alert("Email verified successfully !");
+  }
+};
+
+const handleClearError = (field) => {
+  clearError(errors.value, field);
+};
+
+
 </script>
 
 <template>
   <LeftPanel />
 
   <RightPanel>
-    <AuthHeader :header="header" icon="/src/assets/icons/mail.svg" />
+    <AuthHeader :header="header" :icon="mailIcon" />
 
-    <AuthForm :forms="forms" submit="Send reset link"> </AuthForm>
+    <AuthForm
+      :forms="forms"
+      v-model="formSubmit"
+      @submit="handleSubmit"
+      @clear-error="handleClearError"
+      submit="Verify email"
+      :errors="errors"
+    />
     <div class="flex justify-center items-center gap-[1.66px]">
       <span class="text-sm text-secondary leading-5 tracking-normal">Didn't get it?</span>
 

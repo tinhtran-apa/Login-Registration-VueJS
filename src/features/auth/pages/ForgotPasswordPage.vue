@@ -1,10 +1,12 @@
 <script setup>
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 import AuthForm from "../components/AuthForm.vue";
 import AuthHeader from "../components/AuthHeader.vue";
 import LeftPanel from "../components/LeftPanel.vue";
 import RightPanel from "../components/RightPanel.vue";
 import arrowLeft from "@/assets/icons/arrow-left.svg";
+import mailIcon from "@/assets/icons/mail.svg";
+import { clearError, validateForgotPassword } from "../validators/authValidates.js";
 
 const header = {
   title: "Forgot Password",
@@ -18,15 +20,39 @@ const forms = ref([
     placeholder: "Enter your email",
   },
 ]);
+
+const errors = ref({});
+
+const formSubmit = reactive({ email: "" });
+
+const handleSubmit = () => {
+  const result = validateForgotPassword(formSubmit);
+  errors.value = result || {};
+  if (!result) {
+    alert("Sent to your email !");
+  }
+};
+
+const handleClearError = (field) => {
+  clearError(errors.value, field);
+};
 </script>
 
 <template>
   <LeftPanel />
 
   <RightPanel>
-    <AuthHeader :header="header" icon="/src/assets/icons/mail.svg" />
+    <AuthHeader :header="header" :icon="mailIcon" />
 
-    <AuthForm :forms="forms" submit="Send reset link"> </AuthForm>
+    <AuthForm
+      :forms="forms"
+      submit="Send reset link"
+      v-model="formSubmit"
+      @submit="handleSubmit"
+      @clear-error="handleClearError"
+      :errors="errors"
+    >
+    </AuthForm>
 
     <div class="flex justify-center items-center gap-[1.66px]">
       <RouterLink
