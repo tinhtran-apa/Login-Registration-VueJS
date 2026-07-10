@@ -8,6 +8,7 @@ import SuccessPage from "./pages/SuccessPage.vue";
 export default [
   {
     path: "/",
+    redirect: "/login",
     component: DefaultLayout,
     children: [
       {
