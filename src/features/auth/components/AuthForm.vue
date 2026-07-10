@@ -18,6 +18,10 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
+  showErrorText: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const model = defineModel({
@@ -58,7 +62,7 @@ const checkInputOtp = computed(() => {
           <div class="flex justify-between items-center">
             <Label :for="form.id">{{ form.title }}</Label>
 
-            <span class="text-red-500 text-xs leading-5 tracking-normal">{{ props.errors[form.id] }}</span>
+            <span v-if="props.showErrorText" class="text-red-500 text-xs leading-5 tracking-normal">{{ props.errors[form.id] }}</span>
           </div>
 
           <div class="relative">

@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref } from "vue";
+import { reactive, ref, watch } from "vue";
 import AuthForm from "../components/AuthForm.vue";
 import AuthHeader from "../components/AuthHeader.vue";
 import LeftPanel from "../components/LeftPanel.vue";
@@ -44,7 +44,20 @@ const handleClearError = (field) => {
   clearError(errors.value, field);
 };
 
-
+watch(
+  formSubmit,
+  () => {
+    for (let i = 0; i < OTP_LENGTH; i++) {
+      const id = `otp${i}`;
+      const value = formSubmit[id];
+      const clean = String(value).replace(/[^0-9]/g, "").slice(0, 1);
+      if (clean !== value) {
+        formSubmit[id] = clean;
+      }
+    }
+  },
+  { deep: true }
+);
 </script>
 
 <template>
@@ -60,6 +73,7 @@ const handleClearError = (field) => {
       @clear-error="handleClearError"
       submit="Verify email"
       :errors="errors"
+      :show-error-text="false"
     />
     <div class="flex justify-center items-center gap-[1.66px]">
       <span class="text-sm text-secondary leading-5 tracking-normal">Didn't get it?</span>
