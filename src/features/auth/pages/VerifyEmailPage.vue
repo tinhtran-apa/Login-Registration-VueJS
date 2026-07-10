@@ -9,10 +9,11 @@ import mailIcon from "@/assets/icons/mail.svg";
 import { clearError, validateVerifyEmail } from "../validators/authValidates.js";
 import { ROUTES } from "@/constants/routes.js";
 import { OTP_LENGTH } from "@/constants/validation.js";
+import OtpForm from "../components/OtpForm.vue";
 
 const header = {
   title: "Verify your email",
-  des: `We sent a 6-digit code to your email. Enter it below to confirm your address.`,
+  des: `We sent a ${OTP_LENGTH}-digit code to your email. Enter it below to confirm your address.`,
 };
 const forms = ref([]);
 const formSubmit = reactive({});
@@ -70,14 +71,13 @@ watch(
   <RightPanel>
     <AuthHeader :header="header" :icon="mailIcon" />
 
-    <AuthForm
+    <OtpForm
       :forms="forms"
       v-model="formSubmit"
       @submit="handleSubmit"
       @clear-error="handleClearError"
       submit="Verify email"
       :errors="errors"
-      :show-error-text="false"
     />
     <div class="flex justify-center items-center gap-[1.66px]">
       <span class="text-sm text-secondary leading-5 tracking-normal">Didn't get it?</span>
@@ -90,6 +90,7 @@ watch(
         :to="ROUTES.LOGIN"
       >
         <img :src="arrowLeft" alt="" />
+
         <span class="text-sm">Back to sign in</span>
       </RouterLink>
     </div>
