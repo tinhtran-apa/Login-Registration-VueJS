@@ -1,26 +1,3 @@
-<script setup>
-import Button from "@/shared/ui/components/button.vue";
-import { computed, useSlots } from "vue";
-const slots = useSlots();
-const props = defineProps({
-  header: {
-    type: Object,
-    default: () => ({}),
-  },
-  socials: {
-    type: Array,
-    default: () => [],
-  },
-  icon: {
-    type: String,
-    default: "",
-  },
-});
-const checkSocial = computed(() => {
-  return props.socials.length > 0 ? true : false;
-});
-</script>
-
 <template>
   <div v-if="props.icon" class="mx-auto sm:mx-0 p-[13px] rounded-2xl bg-[#ede9fe] w-fit flex mb-5">
     <img :src="props.icon" alt="" />
@@ -54,3 +31,29 @@ const checkSocial = computed(() => {
     <hr class="h-[1px] w-full" />
   </div>
 </template>
+
+<script setup>
+import Button from "@/shared/ui/components/button.vue";
+import { computed, useSlots } from "vue";
+
+const slots = useSlots();
+
+const props = defineProps({
+  header: {
+    type: Object,
+    default: () => ({}),
+  },
+  socials: {
+    type: Array,
+    default: () => [],
+  },
+  icon: {
+    type: String,
+    default: "",
+  },
+});
+
+const checkSocial = computed(() => {
+  return props.socials.length > 0 ? true : false;
+});
+</script>

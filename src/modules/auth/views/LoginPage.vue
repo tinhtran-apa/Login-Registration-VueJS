@@ -1,3 +1,39 @@
+<template>
+  <LeftPanel />
+
+  <RightPanel>
+    <AuthHeader :socials="socials" :header="header">or sign in with email</AuthHeader>
+
+    <AuthForm
+      :forms="forms"
+      v-model="formSubmit"
+      @submit="handleSubmit"
+      @clear-error="handleClearError"
+      @show-password="handleShowPassword"
+      submit="Sign In"
+      :errors="errors"
+    >
+      <div class="text-secondary text-sm leading-5 font-semibold flex gap-[10px]">
+        <CheckBox />
+
+        <span class="text-secondary tracking-normal">Remember me</span>
+      </div>
+
+      <RouterLink :to="ROUTES.FORGOT_PASSWORD" class="text-tertiary text-sm leading-5 font-semibold tracking-normal"
+        >Forgot your password ?</RouterLink
+      >
+    </AuthForm>
+
+    <div class="flex justify-center items-center gap-[1.66px]">
+      <span class="text-sm text-secondary leading-5 tracking-normal">Dont't have an account?</span>
+
+      <RouterLink class="text-tertiary text-[16px] leading-6 tracking-normal font-semibold" :to="ROUTES.REGISTER">
+        Sign up
+      </RouterLink>
+    </div>
+  </RightPanel>
+</template>
+
 <script setup>
 import { reactive, ref } from "vue";
 import AuthForm from "../components/AuthForm.vue";
@@ -11,6 +47,7 @@ import { showPassword } from "../../../shared/utils/showPassword.js";
 import { ROUTES } from "@/modules/auth/constants/routes.js";
 import googleIcon from "@/shared/assets/icons/google.svg";
 import githubIcon from "@/shared/assets/icons/github.svg";
+
 const header = {
   title: "Welcome Back",
   des: "Sign in to continue to your workspace",
@@ -62,39 +99,3 @@ const handleShowPassword = (field) => {
   showPassword(forms.value, field);
 };
 </script>
-
-<template>
-  <LeftPanel />
-
-  <RightPanel>
-    <AuthHeader :socials="socials" :header="header">or sign in with email</AuthHeader>
-
-    <AuthForm
-      :forms="forms"
-      v-model="formSubmit"
-      @submit="handleSubmit"
-      @clear-error="handleClearError"
-      @show-password="handleShowPassword"
-      submit="Sign In"
-      :errors="errors"
-    >
-      <div class="text-secondary text-sm leading-5 font-semibold flex gap-[10px]">
-        <CheckBox />
-
-        <span class="text-secondary tracking-normal">Remember me</span>
-      </div>
-
-      <RouterLink :to="ROUTES.FORGOT_PASSWORD" class="text-tertiary text-sm leading-5 font-semibold tracking-normal"
-        >Forgot your password ?</RouterLink
-      >
-    </AuthForm>
-
-    <div class="flex justify-center items-center gap-[1.66px]">
-      <span class="text-sm text-secondary leading-5 tracking-normal">Dont't have an account?</span>
-
-      <RouterLink class="text-tertiary text-[16px] leading-6 tracking-normal font-semibold" :to="ROUTES.REGISTER">
-        Sign up
-      </RouterLink>
-    </div>
-  </RightPanel>
-</template>

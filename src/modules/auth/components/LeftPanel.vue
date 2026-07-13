@@ -1,10 +1,3 @@
-<script setup>
-import { ref } from "vue";
-import northWind from "@/shared/assets/icons/northwind-logo.svg"
-import checkIcon from "@/shared/assets/icons/check.svg"
-const contents = ref(["Encrypted credentials", "Email verification built-in", "Password recovery flow"]);
-</script>
-
 <template>
   <div
     class="bg-gradient-to-br from-gradient-start via-gradient-via to-gradient-end p-10 rounded-s-2xl relative hidden sm:flex flex-col justify-between lg:max-w-[376.3125px] lg:w-full lg:p-10 sm:w-[248px] sm:px-[15px]"
@@ -44,3 +37,11 @@ const contents = ref(["Encrypted credentials", "Email verification built-in", "P
     </div>
   </div>
 </template>
+
+<script setup>
+import { ref } from "vue";
+import northWind from "@/shared/assets/icons/northwind-logo.svg";
+import checkIcon from "@/shared/assets/icons/check.svg";
+
+const contents = ref(["Encrypted credentials", "Email verification built-in", "Password recovery flow"]);
+</script>

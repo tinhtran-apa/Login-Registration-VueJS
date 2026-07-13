@@ -1,3 +1,27 @@
+<template>
+  <form class="pb-5" @submit.prevent="emit('submit')">
+    <div class="grid grid-cols-6 gap-2">
+      <template v-for="form in props.forms" :key="form.id">
+        <div class="flex flex-col">
+          <Input
+            v-model="model[form.id]"
+            :class="focusError(props.errors[form.id])"
+            :type="form.type"
+            :id="form.id"
+            :placeholder="form.placeholder"
+            :maxlength="form.maxlength"
+            :pattern="form.pattern"
+            :inputmode="form.inputmode"
+            @input="handleInput(form, $event)"
+            @keyup.backspace="handleBackSpace(form, $event)"
+          />
+        </div>
+      </template>
+    </div>
+    <Button type="submit">{{ props.submit }}</Button>
+  </form>
+</template>
+
 <script setup>
 import Button from "@/shared/ui/components/button.vue";
 import Input from "@/shared/ui/components/input.vue";
@@ -26,8 +50,7 @@ const model = defineModel({
   default: () => ({}),
 });
 
-
-const emit = defineEmits(["submit","clear-error"]);
+const emit = defineEmits(["submit", "clear-error"]);
 
 const handleInput = (form, event) => {
   emit("clear-error", form.id);
@@ -68,30 +91,6 @@ const handleBackSpace = (form, event) => {
 };
 
 const focusError = (field) => {
-  return field ? "border-red-500 focus:border-red-500 focus:outline-none" : "";
+  return field ? "border-red-500 focus:border-red-500 focus:outline-none" : "mb-4 h-[48px] text-center";
 };
-
 </script>
-<template>
-  <form class="pb-5" @submit.prevent="emit('submit')">
-    <div class="grid grid-cols-6 gap-2">
-      <template v-for="form in props.forms" :key="form.id">
-        <div class="flex flex-col">
-          <Input
-            v-model="model[form.id]"
-            :class="['mb-4 h-[48px] text-center', focusError(props.errors[form.id])]"
-            :type="form.type"
-            :id="form.id"
-            :placeholder="form.placeholder"
-            :maxlength="form.maxlength"
-            :pattern="form.pattern"
-            :inputmode="form.inputmode"
-            @input="handleInput(form, $event)"
-            @keyup.backspace="handleBackSpace(form, $event)"
-          />
-        </div>
-      </template>
-    </div>
-    <Button type="submit">{{ props.submit }}</Button>
-  </form>
-</template>

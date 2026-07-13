@@ -1,3 +1,36 @@
+<template>
+  <LeftPanel />
+
+  <RightPanel>
+    <AuthHeader :header="header" :icon="mailIcon" />
+
+    <OtpForm
+      :forms="forms"
+      v-model="formSubmit"
+      @submit="handleSubmit"
+      @clear-error="handleClearError"
+      submit="Verify email"
+      :errors="errors"
+    />
+    <div class="flex justify-center items-center gap-[1.66px]">
+      <span class="text-sm text-secondary leading-5 tracking-normal">Didn't get it?</span>
+
+      <button class="text-tertiary text-[16px] leading-6 tracking-normal font-semibold" to="">Resend Code</button>
+    </div>
+    
+    <div class="flex justify-center items-center gap-[1.66px]">
+      <RouterLink
+        class="flex items-center justify-center gap-1.5 text-tertiary text-[16px] leading-6 tracking-normal font-semibold"
+        :to="ROUTES.LOGIN"
+      >
+        <img :src="arrowLeft" alt="" />
+
+        <span class="text-sm">Back to sign in</span>
+      </RouterLink>
+    </div>
+  </RightPanel>
+</template>
+
 <script setup>
 import { reactive, ref, watch } from "vue";
 import AuthHeader from "../components/AuthHeader.vue";
@@ -63,35 +96,3 @@ watch(
   { deep: true },
 );
 </script>
-
-<template>
-  <LeftPanel />
-
-  <RightPanel>
-    <AuthHeader :header="header" :icon="mailIcon" />
-
-    <OtpForm
-      :forms="forms"
-      v-model="formSubmit"
-      @submit="handleSubmit"
-      @clear-error="handleClearError"
-      submit="Verify email"
-      :errors="errors"
-    />
-    <div class="flex justify-center items-center gap-[1.66px]">
-      <span class="text-sm text-secondary leading-5 tracking-normal">Didn't get it?</span>
-
-      <button class="text-tertiary text-[16px] leading-6 tracking-normal font-semibold" to="">Resend Code</button>
-    </div>
-    <div class="flex justify-center items-center gap-[1.66px]">
-      <RouterLink
-        class="flex items-center justify-center gap-1.5 text-tertiary text-[16px] leading-6 tracking-normal font-semibold"
-        :to="ROUTES.LOGIN"
-      >
-        <img :src="arrowLeft" alt="" />
-
-        <span class="text-sm">Back to sign in</span>
-      </RouterLink>
-    </div>
-  </RightPanel>
-</template>

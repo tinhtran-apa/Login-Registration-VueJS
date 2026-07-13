@@ -1,3 +1,41 @@
+<template>
+  <LeftPanel />
+
+  <RightPanel>
+    <AuthHeader :socials="socials" :header="header">or</AuthHeader>
+
+    <AuthForm
+      :forms="forms"
+      v-model="formSubmit"
+      @submit="handleSubmit"
+      @clear-error="handleClearError"
+      @show-password="handleShowPassword"
+      submit="Sign Up"
+      :errors="errors"
+    >
+      <div class="text-secondary text-sm leading-5 font-semibold flex gap-[10px]">
+        <CheckBox v-model="formSubmit.policy" @change="handleClearError('policy')" />
+        <span :class="errorPolicy"
+          >I agree to the
+
+          <span class="text-tertiary text-[16px] leading-6 font-semibold tracking-normal">Terms of Service</span>
+
+          and
+
+          <span class="text-tertiary text-[16px] leading-5 font-semibold tracking-normal">Privacy Policy</span>
+        </span>
+      </div>
+    </AuthForm>
+
+    <div class="flex justify-center items-center gap-[1.66px]">
+      <span class="text-sm text-secondary leading-5 tracking-normal">Already have an account ?</span>
+      <RouterLink class="text-tertiary text-[16px] leading-6 tracking-normal font-semibold" :to="ROUTES.LOGIN">
+        Sign In
+      </RouterLink>
+    </div>
+  </RightPanel>
+</template>
+
 <script setup>
 import { computed, reactive, ref } from "vue";
 import AuthForm from "../components/AuthForm.vue";
@@ -11,6 +49,7 @@ import { showPassword } from "../../../shared/utils/showPassword.js";
 import { ROUTES } from "@/modules/auth/constants/routes.js";
 import googleIcon from "@/shared/assets/icons/google.svg";
 import githubIcon from "@/shared/assets/icons/github.svg";
+
 const header = {
   title: "Create your account",
   des: "Start your 14-day free trial. No card required",
@@ -74,44 +113,6 @@ const handleShowPassword = (field) => {
 };
 
 const errorPolicy = computed(() => {
-  return errors.value.policy ? "underline decoration-red-500" : "";
+  return errors.value.policy ? "underline decoration-red-500" : "text-secondary tracking-normal";
 });
 </script>
-
-<template>
-  <LeftPanel />
-
-  <RightPanel>
-    <AuthHeader :socials="socials" :header="header">or</AuthHeader>
-
-    <AuthForm
-      :forms="forms"
-      v-model="formSubmit"
-      @submit="handleSubmit"
-      @clear-error="handleClearError"
-      @show-password="handleShowPassword"
-      submit="Sign Up"
-      :errors="errors"
-    >
-      <div class="text-secondary text-sm leading-5 font-semibold flex gap-[10px]">
-        <CheckBox v-model="formSubmit.policy" @change="handleClearError('policy')" />
-        <span :class="['text-secondary tracking-normal', errorPolicy]"
-          >I agree to the
-
-          <span class="text-tertiary text-[16px] leading-6 font-semibold tracking-normal">Terms of Service</span>
-
-          and
-
-          <span class="text-tertiary text-[16px] leading-5 font-semibold tracking-normal">Privacy Policy</span>
-        </span>
-      </div>
-    </AuthForm>
-
-    <div class="flex justify-center items-center gap-[1.66px]">
-      <span class="text-sm text-secondary leading-5 tracking-normal">Already have an account ?</span>
-      <RouterLink class="text-tertiary text-[16px] leading-6 tracking-normal font-semibold" :to="ROUTES.LOGIN">
-        Sign In
-      </RouterLink>
-    </div>
-  </RightPanel>
-</template>

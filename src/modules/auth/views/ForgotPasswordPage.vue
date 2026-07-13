@@ -1,3 +1,31 @@
+<template>
+  <LeftPanel />
+
+  <RightPanel>
+    <AuthHeader :header="header" :icon="mailIcon" />
+
+    <AuthForm
+      :forms="forms"
+      submit="Send reset link"
+      v-model="formSubmit"
+      @submit="handleSubmit"
+      @clear-error="handleClearError"
+      :errors="errors"
+    >
+    </AuthForm>
+
+    <div class="flex justify-center items-center gap-[1.66px]">
+      <RouterLink
+        class="flex items-center justify-center gap-1.5 text-tertiary text-[16px] leading-6 tracking-normal font-semibold"
+        to="/login"
+      >
+        <img :src="arrowLeft" alt="" />
+        <span class="text-sm">Back to sign in</span>
+      </RouterLink>
+    </div>
+  </RightPanel>
+</template>
+
 <script setup>
 import { reactive, ref } from "vue";
 import AuthForm from "../components/AuthForm.vue";
@@ -37,31 +65,3 @@ const handleClearError = (field) => {
   clearError(errors.value, field);
 };
 </script>
-
-<template>
-  <LeftPanel />
-
-  <RightPanel>
-    <AuthHeader :header="header" :icon="mailIcon" />
-
-    <AuthForm
-      :forms="forms"
-      submit="Send reset link"
-      v-model="formSubmit"
-      @submit="handleSubmit"
-      @clear-error="handleClearError"
-      :errors="errors"
-    >
-    </AuthForm>
-
-    <div class="flex justify-center items-center gap-[1.66px]">
-      <RouterLink
-        class="flex items-center justify-center gap-1.5 text-tertiary text-[16px] leading-6 tracking-normal font-semibold"
-        to="/login"
-      >
-        <img :src="arrowLeft" alt="" />
-        <span class="text-sm">Back to sign in</span>
-      </RouterLink>
-    </div>
-  </RightPanel>
-</template>
