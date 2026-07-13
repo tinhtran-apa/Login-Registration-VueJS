@@ -1,5 +1,7 @@
 <script setup>
 import { ref } from "vue";
+import northWind from "@/shared/assets/icons/northwind-logo.svg"
+import checkIcon from "@/shared/assets/icons/check.svg"
 const contents = ref(["Encrypted credentials", "Email verification built-in", "Password recovery flow"]);
 </script>
 
@@ -13,7 +15,7 @@ const contents = ref(["Encrypted credentials", "Email verification built-in", "P
 
     <div class="flex justify-start items-center gap-3">
       <div class="flex p-2 shadow-[0px 1px 3px 0px #0000001a] rounded-xl bg-primary">
-        <img src="../../../assets/icons/northwind-logo.svg" alt="" />
+        <img :src="northWind" alt="" />
       </div>
 
       <span class="text-primary font-semibold leading-7 tracking-[-0.45px] text-lg">Northwind</span>
@@ -33,7 +35,7 @@ const contents = ref(["Encrypted credentials", "Email verification built-in", "P
       <template v-for="content in contents" :key="content.key">
         <div class="flex bg-transparent gap-2">
           <div class="flex self-center p-0.5 rounded-full border border-[#ffffff66]">
-            <img src="../../../assets/icons/check.svg" alt="" />
+            <img :src="checkIcon" alt="" />
           </div>
 
           <span class="font-normal text-sm leading-5 tracking-normal text-[#ffffffcc]">{{ content }}</span>

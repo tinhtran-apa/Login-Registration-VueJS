@@ -4,45 +4,33 @@ import AuthForm from "../components/AuthForm.vue";
 import AuthHeader from "../components/AuthHeader.vue";
 import LeftPanel from "../components/LeftPanel.vue";
 import RightPanel from "../components/RightPanel.vue";
-import arrowLeft from "@/assets/icons/arrow-left.svg";
-import lockIcon from "@/assets/icons/lock.svg";
-import { clearError, validateResetPassword } from "../validators/authValidates.js";
-import { ROUTES } from "@/constants/routes.js";
-import { showPassword } from "../utils/showPassword.js";
+import arrowLeft from "@/shared/assets/icons/arrow-left.svg";
+import mailIcon from "@/shared/assets/icons/mail.svg";
+import { clearError, validateForgotPassword } from "../validators/authValidates.js";
 
 const header = {
-  title: "Set a new password",
-  des: "Choose a strong password you haven't used before. It must be at least 8 characters.",
+  title: "Forgot Password",
+  des: "No problem. Enter the email tied to your account and we'll send you a reset link",
 };
 const forms = ref([
   {
-    id: "newPassword",
-    title: "New password",
-    type: "password",
-    placeholder: "Enter your password",
-  },
-  {
-    id: "confirmNewPassword",
-    title: "Confirm new password",
-    type: "password",
-    placeholder: "Re-enter your password",
+    id: "email",
+    title: "Email",
+    type: "email",
+    placeholder: "Enter your email",
   },
 ]);
 
 const errors = ref({});
 
-const formSubmit = reactive({ newPassword: "", confirmNewPassword: "" });
+const formSubmit = reactive({ email: "" });
 
 const handleSubmit = () => {
-  const result = validateResetPassword(formSubmit);
+  const result = validateForgotPassword(formSubmit);
   errors.value = result || {};
   if (!result) {
-    alert("Updated password successful !");
+    alert("Sent to your email !");
   }
-};
-
-const handleShowPassword = (field) => {
-  showPassword(forms.value, field);
 };
 
 const handleClearError = (field) => {
@@ -54,15 +42,14 @@ const handleClearError = (field) => {
   <LeftPanel />
 
   <RightPanel>
-    <AuthHeader :header="header" :icon="lockIcon" />
+    <AuthHeader :header="header" :icon="mailIcon" />
 
     <AuthForm
       :forms="forms"
-      submit="Update password"
+      submit="Send reset link"
       v-model="formSubmit"
       @submit="handleSubmit"
       @clear-error="handleClearError"
-      @show-password="handleShowPassword"
       :errors="errors"
     >
     </AuthForm>
@@ -70,10 +57,9 @@ const handleClearError = (field) => {
     <div class="flex justify-center items-center gap-[1.66px]">
       <RouterLink
         class="flex items-center justify-center gap-1.5 text-tertiary text-[16px] leading-6 tracking-normal font-semibold"
-        :to="ROUTES.LOGIN"
+        to="/login"
       >
         <img :src="arrowLeft" alt="" />
-
         <span class="text-sm">Back to sign in</span>
       </RouterLink>
     </div>

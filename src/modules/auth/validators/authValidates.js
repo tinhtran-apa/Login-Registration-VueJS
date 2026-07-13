@@ -1,5 +1,5 @@
-import { PASSWORD_MIN_LENGTH } from "@/constants/validation";
-import { invalidEmail, match, minLength, accept, required } from "./rules";
+import { PASSWORD_MIN_LENGTH } from "@/modules/auth/constants/validation.js";
+import { invalidEmail, match, minLength, accept, required } from "../../../shared/utils/rulesValidate.js";
 
 export const validateLogin = (form) => {
   const errors = {};
@@ -36,9 +36,11 @@ export const validateForgotPassword = (form) => {
 
 export const validateResetPassword = (form) => {
   const errors = {};
-  errors.newPassword = required(form.newPassword, "Password") || minLength(form.newPassword, PASSWORD_MIN_LENGTH, "Password");
+  errors.newPassword =
+    required(form.newPassword, "Password") || minLength(form.newPassword, PASSWORD_MIN_LENGTH, "Password");
   errors.confirmNewPassword =
-    required(form.confirmNewPassword, "Confirm password") || match(form.newPassword, form.confirmNewPassword, "Password");
+    required(form.confirmNewPassword, "Confirm password") ||
+    match(form.newPassword, form.confirmNewPassword, "Password");
   if (!errors.newPassword && !errors.confirmNewPassword) {
     return;
   }

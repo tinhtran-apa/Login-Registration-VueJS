@@ -1,5 +1,5 @@
 <script setup>
-import Button from "@/components/common/button.vue";
+import Button from "@/shared/ui/components/button.vue";
 import { computed, useSlots } from "vue";
 const slots = useSlots();
 const props = defineProps({

@@ -1,9 +1,9 @@
 <script setup>
-import Button from "@/components/common/button.vue";
-import Input from "@/components/common/input.vue";
-import Label from "@/components/common/label.vue";
-import eyeIcon from "@/assets/icons/eye.svg";
-import { computed, useSlots } from "vue";
+import Button from "@/shared/ui/components/button.vue";
+import Input from "@/shared/ui/components/input.vue";
+import Label from "@/shared/ui/components/label.vue";
+import eyeIcon from "@/shared/assets/icons/eye.svg";
+import { useSlots } from "vue";
 
 const props = defineProps({
   forms: {

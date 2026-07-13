@@ -1,6 +1,6 @@
 <script setup>
-import Button from "@/components/common/button.vue";
-import Input from "@/components/common/input.vue";
+import Button from "@/shared/ui/components/button.vue";
+import Input from "@/shared/ui/components/input.vue";
 
 const props = defineProps({
   forms: {

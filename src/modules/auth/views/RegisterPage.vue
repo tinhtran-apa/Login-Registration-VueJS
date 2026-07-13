@@ -5,12 +5,12 @@ import LeftPanel from "../components/LeftPanel.vue";
 import RightPanel from "../components/RightPanel.vue";
 import AuthHeader from "../components/AuthHeader.vue";
 import { RouterLink } from "vue-router";
-import CheckBox from "@/components/common/checkbox.vue";
+import CheckBox from "@/shared/ui/components/checkbox.vue";
 import { clearError, validateRegister } from "../validators/authValidates.js";
-import { showPassword } from "../utils/showPassword.js";
-import { ROUTES } from "@/constants/routes.js";
-import googleIcon from "@/assets/icons/google.svg";
-import githubIcon from "@/assets/icons/github.svg";
+import { showPassword } from "../../../shared/utils/showPassword.js";
+import { ROUTES } from "@/modules/auth/constants/routes.js";
+import googleIcon from "@/shared/assets/icons/google.svg";
+import githubIcon from "@/shared/assets/icons/github.svg";
 const header = {
   title: "Create your account",
   des: "Start your 14-day free trial. No card required",

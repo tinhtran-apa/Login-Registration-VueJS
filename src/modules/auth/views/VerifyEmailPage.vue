@@ -1,14 +1,13 @@
 <script setup>
 import { reactive, ref, watch } from "vue";
-import AuthForm from "../components/AuthForm.vue";
 import AuthHeader from "../components/AuthHeader.vue";
 import LeftPanel from "../components/LeftPanel.vue";
 import RightPanel from "../components/RightPanel.vue";
-import arrowLeft from "@/assets/icons/arrow-left.svg";
-import mailIcon from "@/assets/icons/mail.svg";
+import arrowLeft from "@/shared/assets/icons/arrow-left.svg";
+import mailIcon from "@/shared/assets/icons/mail.svg";
 import { clearError, validateVerifyEmail } from "../validators/authValidates.js";
-import { ROUTES } from "@/constants/routes.js";
-import { OTP_LENGTH } from "@/constants/validation.js";
+import { ROUTES } from "@/modules/auth/constants/routes.js";
+import { OTP_LENGTH } from "@/modules/auth/constants/validation.js";
 import OtpForm from "../components/OtpForm.vue";
 
 const header = {

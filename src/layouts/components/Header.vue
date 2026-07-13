@@ -1,8 +1,8 @@
 <script setup>
-import { ROUTES } from "@/constants/routes";
+import { ROUTES } from "@/modules/auth/constants/routes.js";
 import { ref, Transition } from "vue";
 import { useRoute } from "vue-router";
-
+import iconBar from "@/shared/assets/icons/bars.svg"
 const heads = [
   { title: "1 · Login", path: ROUTES.LOGIN },
   { title: "2 · Register", path: ROUTES.REGISTER },
@@ -31,7 +31,7 @@ const handleShowMenu = () => {
         @click="handleShowMenu"
         class="bg-transparent border-0 sm:hidden block transition-transform duration-200 active:scale-95"
       >
-        <img src="../../assets/icons/bars.svg" alt="" />
+        <img :src="iconBar" alt="" />
       </button>
 
       <template v-for="head in heads" :key="head">

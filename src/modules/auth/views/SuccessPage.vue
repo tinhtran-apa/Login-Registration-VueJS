@@ -1,17 +1,14 @@
 <script setup>
-import { ref } from "vue";
-import AuthForm from "../components/AuthForm.vue";
 import AuthHeader from "../components/AuthHeader.vue";
 import LeftPanel from "../components/LeftPanel.vue";
 import RightPanel from "../components/RightPanel.vue";
-import success from "@/assets/icons/success.svg";
-import Button from "@/components/common/button.vue";
+import success from "@/shared/assets/icons/success.svg";
+import Button from "@/shared/ui/components/button.vue";
 
 const header = {
   title: "You're all set",
   des: "Your email has been verified and your account is ready. Welcome to Northwind — let's get you to your workspace.",
 };
-const forms = ref([]);
 </script>
 
 <template>

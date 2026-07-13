@@ -1,11 +1,11 @@
 import DefaultLayout from "@/layouts/DefaultLayout.vue";
-import LoginPage from "./pages/LoginPage.vue";
-import RegisterPage from "./pages/RegisterPage.vue";
-import ForgotPasswordPage from "./pages/ForgotPasswordPage.vue";
-import ResetPasswordPage from "./pages/ResetPasswordPage.vue";
-import VerifyEmailPage from "./pages/VerifyEmailPage.vue";
-import SuccessPage from "./pages/SuccessPage.vue";
-import { ROUTES } from "@/constants/routes.js";
+import LoginPage from "@/modules/auth/views/LoginPage.vue";
+import RegisterPage from "@/modules/auth/views/RegisterPage.vue";
+import ForgotPasswordPage from "@/modules/auth/views/ForgotPasswordPage.vue";
+import ResetPasswordPage from "@/modules/auth/views/ResetPasswordPage.vue";
+import VerifyEmailPage from "@/modules/auth/views/VerifyEmailPage.vue";
+import SuccessPage from "@/modules/auth/views/SuccessPage.vue";
+import { ROUTES } from "@/modules/auth/constants/routes.js";
 export default [
   {
     path: "/",
