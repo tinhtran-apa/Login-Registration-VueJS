@@ -1,6 +1,3 @@
-<script setup>
-import Header from "@/layouts/components/Header.vue";
-</script>
 <template>
   <Header />
   <main>
@@ -13,3 +10,7 @@ import Header from "@/layouts/components/Header.vue";
     </div>
   </main>
 </template>
+
+<script setup>
+import Header from "@/layouts/components/Header.vue";
+</script>

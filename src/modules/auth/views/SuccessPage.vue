@@ -5,6 +5,7 @@
     <div class="p-[13px] rounded-full bg-success-bg w-fit flex mb-5 ml-auto mr-auto">
       <img :src="success" alt="" />
     </div>
+    
     <div class="text-center sm:text-center [&_.pb-5]:sm:!text-center">
       <AuthHeader :header="header" />
     </div>

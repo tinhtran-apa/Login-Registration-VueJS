@@ -15,6 +15,7 @@
     >
       <div class="text-secondary text-sm leading-5 font-semibold flex gap-[10px]">
         <CheckBox v-model="formSubmit.policy" @change="handleClearError('policy')" />
+
         <span :class="errorPolicy"
           >I agree to the
 
@@ -29,6 +30,7 @@
 
     <div class="flex justify-center items-center gap-[1.66px]">
       <span class="text-sm text-secondary leading-5 tracking-normal">Already have an account ?</span>
+      
       <RouterLink class="text-tertiary text-[16px] leading-6 tracking-normal font-semibold" :to="ROUTES.LOGIN">
         Sign In
       </RouterLink>

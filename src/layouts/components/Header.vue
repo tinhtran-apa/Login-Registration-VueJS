@@ -12,6 +12,7 @@
         <RouterLink :to="head.path" :class="checkPathDesktop(head.path)">{{ head.title }}</RouterLink>
       </template>
     </nav>
+
     <Transition
       enter-active-class="duration-300"
       enter-from-class="-translate-x-full"
